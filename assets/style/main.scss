@@ -1,0 +1,47 @@
+$desktop: 1024px;
+$tablet: 768px;
+$mobile: 576px;
+
+$desktop-query: "(min-width: #{$desktop})";
+$tablet-query: "(min-width: #{$tablet}) and (max-width: #{$desktop - 1px})";
+$mobile-query: "(max-width: #{$tablet - 1px})";
+
+@mixin grid-layout($columns) {
+	display: grid;
+	grid-template-columns: repeat($columns, 1fr);
+	gap: 20px;
+}
+
+@mixin desktop {
+	@media #{$desktop-query} {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media #{$tablet-query} {
+		@content;
+	}
+}
+
+@mixin mobile {
+	@media #{$mobile-query} {
+		@content;
+	}
+}
+
+.container {
+	width: 100%;
+
+	@include desktop {
+		@include grid-layout(4);
+	}
+
+	@include tablet {
+		@include grid-layout(3);
+	}
+
+	@include mobile {
+		@include grid-layout(2);
+	}
+}
